@@ -8,7 +8,7 @@ public class DoorTrigger : MonoBehaviour {
 	private AudioSource sound;
 
 	public delegate void ConsoleEvent(GameObject con);
-	public static event ConsoleEvent OnTriggerStarted;
+	public static event ConsoleEvent OnTriggerEntered;
 	public static event ConsoleEvent OnTriggerQuit;
 
 	void Start () {
@@ -19,7 +19,9 @@ public class DoorTrigger : MonoBehaviour {
 	void OnTriggerEnter(Collider myCollider) {
 		if (myCollider.gameObject.name == "Player") {
 			sound.Play();
-			OnTriggerStarted(doorAction);
+			if (doorAction == null)
+				Debug.Log ("Null");
+			OnTriggerEntered(doorAction);
 		}
 	}
 

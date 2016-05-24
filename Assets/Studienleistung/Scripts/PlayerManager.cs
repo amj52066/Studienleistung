@@ -28,6 +28,7 @@ public class PlayerManager : MonoBehaviour {
 	}
 
 	public void SetDefaultHealth() {
+		Debug.Log ("Health decreased!");
 		myHealth = defaultHealth;
 		OnHealthChanged (myHealth);
 	}

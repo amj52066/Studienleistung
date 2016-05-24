@@ -22,7 +22,7 @@ public class CanvasMan : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		healthText = GameObject.Find ("Canvas/HealthUI").GetComponent<Text> ();
-		PlayTimeText = GameObject.Find ("Canvas/PlayTime").GetComponent<Text> ();
+		PlayTimeText = GameObject.Find ("Canvas/PlayTimeUI").GetComponent<Text> ();
 		defaultTime = 0.0f;
 		winText = GameObject.Find ("Canvas/GameWon");
 		winText.SetActive (false);
@@ -30,7 +30,7 @@ public class CanvasMan : MonoBehaviour {
 		lostText.SetActive (false);
 		timeTextObject = GameObject.Find("Canvas/FinishTime");
 		timeTextObject.SetActive (false);
-		timeText = GameObject.Find ("Canvas/FinishTime").GetComponent<Text> ();
+		timeText = timeTextObject.GetComponent<Text> ();
 	}
 
 	public void changeHealthUI(int currentHealth) {

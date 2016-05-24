@@ -8,21 +8,19 @@ public class BombTrigger : MonoBehaviour {
 
 	public int bombState = 10;
 
-	private AudioSource mySound;
-	private BoxCollider mySphereCollider;
+	private SphereCollider mySphereCollider;
 	private MeshRenderer myMesh;
 
 
 	void Start () {
-		mySphereCollider = gameObject.GetComponent<BoxCollider> ();
-		myMesh = gameObject.GetComponent<MeshRenderer> ();
-		mySound = gameObject.GetComponent<AudioSource> ();
+		mySphereCollider = gameObject.GetComponent<SphereCollider> ();
+		myMesh = GetComponent<MeshRenderer> ();
 	}
 
-	void OnTriggerStart(Collider myCollider) {
+	void OnTriggerEnter(Collider myCollider) {
 		if (myCollider.gameObject.name == "Player") {
+			Debug.Log ("Bomb reached!");
 			DeactivateBomb(false);
-			mySound.Play();
 			myCollider.gameObject.GetComponent<PlayerManager>().decreaseHealth(bombState);
 		}
 	}
