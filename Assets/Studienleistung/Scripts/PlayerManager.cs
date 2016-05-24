@@ -47,4 +47,6 @@ public class PlayerManager : MonoBehaviour {
 	public void respawnPlayer() {
 		myInputManager.setPosition(spawnPos);
 	}
+
+
 }
