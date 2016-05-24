@@ -17,7 +17,7 @@ public class WinTrigger : MonoBehaviour {
 		if(myCollider.gameObject.name == "Player") {
 			Debug.Log ("reachedCollider");
 			OnGameFinished ();
-			//myGameManager.GameIsWon();
+			myGameManager.gameWon();
 		}
 	}
 

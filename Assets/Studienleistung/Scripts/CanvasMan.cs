@@ -7,64 +7,101 @@ public class CanvasMan : MonoBehaviour {
 	private string healthString = "Health: ";
 	private Text healthText;
 	private string timeString = "Time: ";
-	private Text PlayTimeText;
+	private Text PlaytimeText;
 	private GameObject winText;
 	private GameObject lostText; 
 	private GameObject timeTextObject;
+	private Text timeText;
 	private float Timer;
 	private string timeFinishedString = "It took: ";
 	private string secondsString = "seconds";
 	private int waitingTime = 5;
 	private float startTimer;
-	private Text timeText;
-	private float defaultTime;
+	private Button doorButton;
+	private int currentHealth;
+	private GameObject doorGameObject;
+	private Door currentDoor;
 
-	// Use this for initialization
+	// initialization
 	void Start () {
 		healthText = GameObject.Find ("Canvas/HealthUI").GetComponent<Text> ();
-		PlayTimeText = GameObject.Find ("Canvas/PlayTimeUI").GetComponent<Text> ();
-		defaultTime = 0.0f;
+		PlaytimeText = GameObject.Find ("Canvas/PlayTimeUI").GetComponent<Text> ();
+		timeText = GameObject.Find ("Canvas/FinishTime").GetComponent<Text> ();
+		Timer = 0.0f;
 		winText = GameObject.Find ("Canvas/GameWon");
-		winText.SetActive (false);
 		lostText = GameObject.Find ("Canvas/GameLost");
-		lostText.SetActive (false);
+		winText.GetComponent<Text> ().enabled = false;
+		lostText.GetComponent<Text> ().enabled = false;
 		timeTextObject = GameObject.Find("Canvas/FinishTime");
-		timeTextObject.SetActive (false);
-		timeText = timeTextObject.GetComponent<Text> ();
+		timeTextObject.GetComponent<Text> ().enabled = false;
+		initButton ();
+	}
+
+	private void initButton() {
+		doorGameObject = GameObject.Find ("Canvas/DoorButtonUI");
+		doorButton = GameObject.Find ("Canvas/DoorButtonUI").GetComponent<Button>();
+		doorGameObject.SetActive (false);
+	}
+
+	void doorButtonListener(Door currentDoor) {
+		currentDoor.setDoor = true;
+	}
+
+
+	public void showDoorButton(Door currentDoor) {
+		doorGameObject.SetActive (true);
+		this.currentDoor = currentDoor;
+		doorButton.onClick.AddListener (() => {
+			doorButtonListener (currentDoor);
+		});
+	}
+
+	public void hidedoorButton() {
+		doorGameObject.SetActive (false);
 	}
 
 	public void changeHealthUI(int currentHealth) {
+		this.currentHealth = currentHealth;
 		healthText.text = healthString + currentHealth;
 	}
 
-	public void showGameLostUI() {
+	public void showLostGame() {
 		startTimer = Time.deltaTime;
-		lostText.SetActive (true);
-		showPlayerTime();
+		lostText.GetComponent<Text> ().enabled = true;
+		showFinishedTime ();
 	}
 
-	public void showWinUI(){
+	public void showWonGame(){
 		startTimer = Time.deltaTime;
-		winText.SetActive (true);
-		showPlayerTime();
-	}
-
-	private void showPlayerTime() {
-		timeText.text = timeString + Timer + secondsString;
-		timeTextObject.SetActive (true);
-		while (Time.deltaTime - startTimer <= waitingTime){
-		}
-		deactivateTexts();
-	}
-
-	private void deactivateTexts() {
-		timeTextObject.SetActive(false);
-		winText.SetActive(false);
-		lostText.SetActive(false);
+		winText.GetComponent<Text> ().enabled = true;
+		showFinishedTime ();
 	}
 		
-	void Update() {
+	private void showFinishedTime () {
+		float secsToWait = 5.0f;
+		timeTextObject.GetComponent<Text> ().enabled = true;
+		timeText.text = timeFinishedString + Timer + secondsString;
+		StartCoroutine (Wait());
+	}
+
+	IEnumerator Wait(){
+		yield return new WaitForSeconds (5);
+		closeAll();
+		GameObject.Find ("GameManagerObject").GetComponent<GameManager> ().resetGame ();
+	}
+		
+	private void closeAll() {
+		timeTextObject.GetComponent<Text> ().enabled = false;
+		winText.GetComponent<Text> ().enabled = false;
+		lostText.GetComponent<Text> ().enabled = false;
+	}
+
+	public void ResetTime() {
+		Timer = 0.0f; 
+	}
+		
+	void Update () {
 		Timer += Time.deltaTime;
-		//timeText.text = timeString + Timer;
+		PlaytimeText.text = timeString + Timer;
 	}
 }

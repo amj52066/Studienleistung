@@ -39,11 +39,11 @@ public class GameManager : MonoBehaviour {
 	
 	}
 
-	void resetGame() {
+	public void resetGame() {
 		myPlayerManager.respawnPlayer();
 	}
 
-	void gameWon() {
+	public void gameWon() {
 		myPlayerManager.respawnPlayer();
 		myPlayerManager.SetDefaultHealth ();
 		closeAllDoors();

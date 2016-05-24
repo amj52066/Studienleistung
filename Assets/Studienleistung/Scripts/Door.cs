@@ -33,4 +33,17 @@ public class Door : MonoBehaviour {
 			transform.Translate (Vector3.down * closingSpeed * Time.deltaTime);
 		}
 	}
+
+	public bool setDoor
+	{
+		get
+		{
+			return isOpen; 
+		}
+
+		set
+		{
+			isOpen = value;
+		}
+	}
 }
