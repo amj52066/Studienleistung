@@ -9,7 +9,7 @@ public class WinTrigger : MonoBehaviour {
 	private GameManager myGameManager;
 
 	void Start () {
-		myGameManager = GetComponent<GameManager>();
+		myGameManager = GameObject.Find("GameManagerObject").GetComponent<GameManager>();
 	}
 
 	void OnTriggerEnter(Collider myCollider)

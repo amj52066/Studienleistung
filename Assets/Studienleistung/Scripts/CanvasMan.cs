@@ -24,6 +24,7 @@ public class CanvasMan : MonoBehaviour {
 
 	// initialization
 	void Start () {
+		PlayerManager.OnHealthChanged += UpdateHealth;
 		healthText = GameObject.Find ("Canvas/HealthUI").GetComponent<Text> ();
 		PlaytimeText = GameObject.Find ("Canvas/PlayTimeUI").GetComponent<Text> ();
 		timeText = GameObject.Find ("Canvas/FinishTime").GetComponent<Text> ();
@@ -103,5 +104,9 @@ public class CanvasMan : MonoBehaviour {
 	void Update () {
 		Timer += Time.deltaTime;
 		PlaytimeText.text = timeString + Timer;
+	}
+
+	void UpdateHealth(int currentHealth) {
+		healthText.text = healthString + currentHealth;
 	}
 }

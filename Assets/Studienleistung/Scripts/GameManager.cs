@@ -72,5 +72,9 @@ public class GameManager : MonoBehaviour {
 		myPlayerManager.respawnPlayer ();
 		myPlayerManager.SetDefaultHealth ();
 	}
+
+	private void resetTime(){
+		myCanvasMan.ResetTime ();
+	}
 		
 }
