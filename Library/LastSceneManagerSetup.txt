@@ -1,0 +1,4 @@
+sceneSetups:
+- path: D:/Judith/Music/Downloads/dasteini-psmg-studienleistung-eb1b160d705f/dasteini-psmg-studienleistung-eb1b160d705f/Assets/Studienleistung/StartScene.unity
+  isLoaded: 1
+  isActive: 1
