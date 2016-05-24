@@ -56,10 +56,6 @@ public class GameManager : MonoBehaviour {
 		}
 	}
 
-	public void OnDoorButtonClicked() {
-		
-	}
-
 	void ReactivateAllBombs(){
 		for (int i = 0; i < bombs.Length; i++) {
 			bombs [i].GetComponent<BombTrigger> ().DeactivateBomb(true);

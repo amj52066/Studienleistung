@@ -17,14 +17,19 @@ public class CanvasMan : MonoBehaviour {
 	private string secondsString = "seconds";
 	private int waitingTime = 5;
 	private float startTimer;
-	private Button doorButton;
 	private int currentHealth;
-	private GameObject doorGameObject;
-	private Door currentDoor;
+	private GameObject currentDoor;
+	bool GameWon = false;
+	private GameObject doorButton;
+
 
 	// initialization
 	void Start () {
 		PlayerManager.OnHealthChanged += UpdateHealth;
+		DoorTrigger.OnTriggerEntered += ShowButton;
+		DoorTrigger.OnTriggerQuit += HideButton;
+		//WinTrigger.OnGameFinished += GameFinished;
+
 		healthText = GameObject.Find ("Canvas/HealthUI").GetComponent<Text> ();
 		PlaytimeText = GameObject.Find ("Canvas/PlayTimeUI").GetComponent<Text> ();
 		timeText = GameObject.Find ("Canvas/FinishTime").GetComponent<Text> ();
@@ -35,31 +40,12 @@ public class CanvasMan : MonoBehaviour {
 		lostText.GetComponent<Text> ().enabled = false;
 		timeTextObject = GameObject.Find("Canvas/FinishTime");
 		timeTextObject.GetComponent<Text> ().enabled = false;
-		initButton ();
-	}
-
-	private void initButton() {
-		doorGameObject = GameObject.Find ("Canvas/DoorButtonUI");
-		doorButton = GameObject.Find ("Canvas/DoorButtonUI").GetComponent<Button>();
-		doorGameObject.SetActive (false);
-	}
-
-	void doorButtonListener(Door currentDoor) {
-		currentDoor.setDoor = true;
+		doorButton = GameObject.Find ("Canvas/DoorButtonUI");
+		doorButton.SetActive (false);
 	}
 
 
-	public void showDoorButton(Door currentDoor) {
-		doorGameObject.SetActive (true);
-		this.currentDoor = currentDoor;
-		doorButton.onClick.AddListener (() => {
-			doorButtonListener (currentDoor);
-		});
-	}
 
-	public void hidedoorButton() {
-		doorGameObject.SetActive (false);
-	}
 
 	public void changeHealthUI(int currentHealth) {
 		this.currentHealth = currentHealth;
@@ -109,4 +95,29 @@ public class CanvasMan : MonoBehaviour {
 	void UpdateHealth(int currentHealth) {
 		healthText.text = healthString + currentHealth;
 	}
+
+	void ShowButton(GameObject door) {
+		if (door.GetComponent<Door> ().isOpen == false) {
+			doorButton.SetActive (true);
+			currentDoor = door;
+		}
+	}
+
+	void HideButton(GameObject door) {
+		currentDoor = null;
+		doorButton.SetActive (false);
+	}
+
+	public void OnButtonClicked() {
+		if (currentDoor != null) {
+			currentDoor.GetComponent<Door> ().isOpen = true;
+		}
+	}
+
+	//void GameFinished() {
+		//messageScreen.SetActive (true);
+		//time = Time.time - gameStartTime;
+		//winText 
+		//GameWon = true;
+	//}
 }
