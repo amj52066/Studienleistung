@@ -28,7 +28,7 @@ public class CanvasMan : MonoBehaviour {
 		PlayerManager.OnHealthChanged += UpdateHealth;
 		DoorTrigger.OnTriggerEntered += ShowButton;
 		DoorTrigger.OnTriggerQuit += HideButton;
-		//WinTrigger.OnGameFinished += GameFinished;
+		WinTrigger.OnGameFinished += GameFinished;
 
 		healthText = GameObject.Find ("Canvas/HealthUI").GetComponent<Text> ();
 		PlaytimeText = GameObject.Find ("Canvas/PlayTimeUI").GetComponent<Text> ();
@@ -43,10 +43,7 @@ public class CanvasMan : MonoBehaviour {
 		doorButton = GameObject.Find ("Canvas/DoorButtonUI");
 		doorButton.SetActive (false);
 	}
-
-
-
-
+		
 	public void changeHealthUI(int currentHealth) {
 		this.currentHealth = currentHealth;
 		healthText.text = healthString + currentHealth;
@@ -59,7 +56,7 @@ public class CanvasMan : MonoBehaviour {
 	}
 
 	public void showWonGame(){
-		startTimer = Time.deltaTime;
+		startTimer = Time.time;
 		winText.GetComponent<Text> ().enabled = true;
 		showFinishedTime ();
 	}
@@ -75,6 +72,7 @@ public class CanvasMan : MonoBehaviour {
 		yield return new WaitForSeconds (5);
 		closeAll();
 		GameObject.Find ("GameManagerObject").GetComponent<GameManager> ().resetGame ();
+		ResetTime ();
 	}
 		
 	private void closeAll() {
@@ -84,7 +82,7 @@ public class CanvasMan : MonoBehaviour {
 	}
 
 	public void ResetTime() {
-		Timer = 0.0f; 
+		Timer = 0.0f;
 	}
 		
 	void Update () {
@@ -114,10 +112,12 @@ public class CanvasMan : MonoBehaviour {
 		}
 	}
 
-	//void GameFinished() {
-		//messageScreen.SetActive (true);
-		//time = Time.time - gameStartTime;
-		//winText 
-		//GameWon = true;
-	//}
+	void GameFinished() {
+		if (currentHealth <= 0) {
+			showWonGame ();
+		}else{
+			showLostGame();
+		}
+
+	}
 }

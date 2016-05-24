@@ -1,14 +1,14 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Studienleistung\Scripts\GameManager.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Studienleistung\Scripts\CanvasMan.cs">
     <Files>
-      <File FileName="Assets\Studienleistung\Scripts\CanvasMan.cs" Line="1" Column="1" />
+      <File FileName="Assets\Studienleistung\Scripts\CanvasMan.cs" Line="87" Column="3" />
       <File FileName="Assets\Studienleistung\Scripts\BombTrigger.cs" Line="29" Column="33" />
       <File FileName="Assets\Studienleistung\Scripts\PlayerInputManager.cs" Line="1" Column="1" />
       <File FileName="Assets\Studienleistung\Scripts\PlayerManager.cs" Line="1" Column="1" />
-      <File FileName="Assets\Studienleistung\Scripts\GameManager.cs" Line="12" Column="69" />
-      <File FileName="Assets\Studienleistung\Scripts\WinTrigger.cs" Line="1" Column="1" />
-      <File FileName="Assets\Studienleistung\Scripts\Door.cs" Line="1" Column="1" />
+      <File FileName="Assets\Studienleistung\Scripts\GameManager.cs" Line="57" Column="3" />
+      <File FileName="Assets\Studienleistung\Scripts\WinTrigger.cs" Line="14" Column="22" />
+      <File FileName="Assets\Studienleistung\Scripts\Door.cs" Line="37" Column="21" />
       <File FileName="Assets\Studienleistung\Scripts\DoorTrigger.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
